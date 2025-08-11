@@ -15,7 +15,7 @@
 html, body { height: 100%; scroll-behavior: smooth; }
 body {
   margin: 0;
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   background: radial-gradient(1200px 800px at 20% -10%, rgba(255,122,162,.08), transparent),
               radial-gradient(1000px 700px at 100% 0%, rgba(139,141,255,.07), transparent),
               var(--bg);
@@ -32,19 +32,78 @@ body {
   border-bottom: 1px solid var(--border);
 }
 .nav {
-  display: grid;
-  grid-template-columns: auto 1fr auto auto;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  height: 64px;
-  gap: 14px;
+  height: 72px; /* taller */
+  padding: 0 24px;
 }
-.brand { color: var(--text); font-weight: 700; text-decoration: none; letter-spacing: .5px; }
+.brand {
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 1px;
+  color: var(--accent);
+}
 .nav-toggle, .theme-toggle {
   background: transparent; border: 0; color: var(--text); cursor: pointer; display: none;
 }
-.nav-links { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; }
-.nav-links a { color: var(--muted); text-decoration: none; font-weight: 500; }
-.nav-links a:hover { color: var(--text); }
+.nav-links {
+  display: flex;
+  align-items: center; /* ensures all links align vertically */
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a,
+.nav-links .btn {
+  display: flex;
+  align-items: center; /* center text vertically */
+  height: 40px; /* same height for all items */
+  line-height: 1;
+}
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 15px;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background-color: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--text);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-links .btn {
+  padding: 0 16px; /* adjust padding so height matches other links */
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: transparent;
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.nav-links .btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
 .btn {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 10px 14px; border-radius: var(--radius);
@@ -64,12 +123,95 @@ body {
 .muted { color: var(--muted); }
 
 /* Hero */
-.hero { padding-top: 96px; }
-.hero__grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; }
-.hero__title { font-size: clamp(32px, 6vw, 56px); line-height: 1.05; margin: 0 0 6px; }
-.hero__subtitle { color: var(--muted); margin: 0 0 14px; font-weight: 600; }
-.hero__lead { color: var(--text); opacity: .9; font-size: clamp(15px, 1.5vw, 18px); }
-.hero__cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+/* ===== Hero layout polish ===== */
+
+/* Give the hero more breathing room and center the whole grid */
+.hero { padding: 100px 0 56px; }
+.hero .container { max-width: 1200px; }
+
+/* Center the two columns and constrain each column width */
+.hero__grid {
+  /* wider gap + centered grid */
+  gap: 56px;
+  justify-content: center;
+
+  /* explicit column sizes keep text from hugging left */
+  grid-template-columns:
+    minmax(520px, 680px)   /* text column */
+    minmax(280px, 420px);  /* avatar column */
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* Nudge the text block toward center (not glued to the left) */
+.hero__grid > div:first-child {
+  justify-self: end;     /* shifts the text column slightly right */
+  max-width: 640px;      /* comfortable measure for readability */
+}
+
+/* Fine type rhythm */
+.hero__title { letter-spacing: -0.5px; }
+.hero__lead  { line-height: 1.65; }
+
+/* Tablet: keep balance without crowding */
+@media (max-width: 1100px) {
+  .hero__grid {
+    grid-template-columns: minmax(480px, 1fr) 360px;
+    gap: 40px;
+  }
+}
+
+/* Mobile: stack nicely with good side padding */
+@media (max-width: 900px) {
+  .hero { padding-top: 72px; }
+  .hero__grid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 28px;
+  }
+  .hero__grid > div:first-child {
+    justify-self: center;
+    max-width: 92vw;
+  }
+}
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 40px;
+  align-items: center;
+  padding: 0 32px; /* space from left & right */
+}
+
+.hero__grid > div:first-child {
+  max-width: 650px; /* keeps text readable */
+}
+
+.hero__title {
+  font-size: clamp(32px, 6vw, 56px);
+  line-height: 1.05;
+  margin: 0 0 6px;
+}
+
+.hero__subtitle {
+  color: var(--muted);
+  margin: 0 0 14px;
+  font-weight: 600;
+}
+
+.hero__lead {
+  color: var(--text);
+  opacity: .9;
+  font-size: clamp(15px, 1.5vw, 18px);
+  line-height: 1.6;
+}
+
+.hero__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+
 
 .avatar-wrap { position: relative; display: grid; place-items: center; }
 .avatar {
