@@ -1,7 +1,6 @@
 pipeline {
   agent any
-  options { timestamps(); ansiColor('xterm'); skipDefaultCheckout(true) }
-
+ 
   environment {
     // EDIT THESE
     DOCKERHUB_USER = 'ashoky412'     // <-- change
