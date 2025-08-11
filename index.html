@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ashok Pindiboyina — Site Reliability Engineer (SRE)</title>
+  <meta name="description" content="Ashok Pindiboyina — SRE/DevOps specialist with 8+ years experience in AWS, Kubernetes, Terraform, Jenkins, and Observability." />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="Ashok Pindiboyina — SRE" />
+  <meta property="og:description" content="SRE/DevOps specialist with 8+ years experience in AWS, Kubernetes, Terraform, Jenkins, and Observability." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.ashokpindiboyina.in" />
+  <meta property="og:image" content="assets/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Icons (Feather) -->
+  <script defer src="https://unpkg.com/feather-icons"></script>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ashok Pindiboyina",
+    "jobTitle": "Site Reliability Engineer",
+    "email": "mailto:ashokpv.1993@gmail.com",
+    "url": "https://www.ashokpindiboyina.in",
+    "sameAs": [
+      "https://github.com/Ashoky412",
+      "https://www.linkedin.com/in/ashok-yadav-p-6359791a0/",
+      "https://medium.com/@ashoky412"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Tirupati",
+      "addressRegion": "Andhra Pradesh",
+      "addressCountry": "IN"
+    }
+  }
+  </script>
+</head>
+<body>
+  <!-- Header / Nav -->
+  <header class="site-header">
+    <nav class="container nav">
+      <a class="brand" href="#home">AP.</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle Menu">
+        <i data-feather="menu"></i>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a class="btn btn--ghost" href="assets/Ashok_Pindiboyina_Resume.pdf" target="_blank" rel="noreferrer">Resume</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
+        <i data-feather="sun"></i>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="section hero">
+    <div class="container hero__grid">
+      <div>
+        <h1 class="hero__title">Ashok Pindiboyina</h1>
+        <p class="hero__subtitle">Site Reliability Engineer (SRE) · DevOps Specialist</p>
+        <p class="hero__lead">
+          SRE with 8+ years building reliable platforms on AWS & Kubernetes. I design production CI/CD,
+          harden infrastructure, and make systems observable, scalable, and cost‑efficient.
+        </p>
+        <div class="hero__cta">
+          <a class="btn" href="assets/Ashok_Pindiboyina_Resume.pdf" target="_blank" rel="noreferrer">
+            <i data-feather="download"></i> Download Resume
+          </a>
+          <button class="btn btn--ghost" id="copyEmail">
+            <i data-feather="mail"></i> Copy Email
+          </button>
+          <a class="icon-link" href="https://github.com/Ashoky412" target="_blank" aria-label="GitHub"><i data-feather="github"></i></a>
+          <a class="icon-link" href="https://www.linkedin.com/in/ashok-yadav-p-6359791a0/" target="_blank" aria-label="LinkedIn"><i data-feather="linkedin"></i></a>
+          <a class="icon-link" href="https://medium.com/@ashoky412" target="_blank" aria-label="Medium"><i data-feather="edit-3"></i></a>
+        </div>
+
+        <div class="highlights">
+          <div class="card card--soft">
+            <i data-feather="cpu"></i>
+            <div>
+              <h3>Deep Kubernetes</h3>
+              <p>From cluster bring‑up to storage, networking, and failure drills.</p>
+            </div>
+          </div>
+          <div class="card card--soft">
+            <i data-feather="command"></i>
+            <div>
+              <h3>Production CI/CD</h3>
+              <p>Jenkins on K8s, hardened agents, artifact flow, rollbacks.</p>
+            </div>
+          </div>
+          <div class="card card--soft">
+            <i data-feather="activity"></i>
+            <div>
+              <h3>Observability</h3>
+              <p>Prometheus + Grafana, SLOs, runbooks, and MTTR reduction.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="avatar-wrap">
+        <!-- Replace with your optimized portrait -->
+        <img class="avatar" src="assets/avatar.jpg" alt="Ashok Pindiboyina" loading="lazy" />
+        <span class="avatar-glow"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- What I Do -->
+  <section id="work" class="section">
+    <div class="container">
+      <h2 class="section__title">What I Do</h2>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Reliability Engineering</h3>
+          <p>SLOs/error budgets, incident response, capacity planning, performance tuning, chaos/failure drills.</p>
+        </div>
+        <div class="card">
+          <h3>CI/CD Platforming</h3>
+          <p>Secure pipelines, policy‑as‑code, artifact strategy, branch protections, rollback patterns.</p>
+        </div>
+        <div class="card">
+          <h3>K8s & Cloud Architecture</h3>
+          <p>Day‑2 ops for clusters, networking & storage, backups/restore (Velero), and cost awareness.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="section alt">
+    <div class="container">
+      <h2 class="section__title">Projects & Labs</h2>
+      <div id="projectsGrid" class="grid-3"></div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="section">
+    <div class="container">
+      <h2 class="section__title">Skills</h2>
+      <div class="skills">
+        <div class="skill"><span>Cloud</span><ul><li>AWS</li><li>Azure</li></ul></div>
+        <div class="skill"><span>Kubernetes</span><ul><li>kubeadm</li><li>Networking</li><li>StatefulSets</li><li>RBAC</li><li>Helm</li></ul></div>
+        <div class="skill"><span>CI/CD</span><ul><li>Jenkins</li><li>GitHub Actions</li><li>Pipelines</li><li>Shared Libraries</li></ul></div>
+        <div class="skill"><span>IaC</span><ul><li>Terraform</li><li>Ansible</li></ul></div>
+        <div class="skill"><span>Observability</span><ul><li>Prometheus</li><li>Grafana</li><li>ELK</li><li>New Relic</li><li>Site24x7</li></ul></div>
+        <div class="skill"><span>Containers</span><ul><li>Docker</li><li>Security</li><li>Networking</li></ul></div>
+        <div class="skill"><span>Programming</span><ul><li>Python</li><li>Shell</li></ul></div>
+        <div class="skill"><span>Databases</span><ul><li>MySQL</li><li>PostgreSQL</li><li>MongoDB</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience" class="section alt">
+    <div class="container">
+      <h2 class="section__title">Experience</h2>
+      <div class="timeline">
+        <div class="timeline__item">
+          <div class="timeline__head">
+            <h3>Senior SRE / DevOps Engineer</h3>
+            <span>2017 — Present</span>
+          </div>
+          <p class="muted">Various (AWS/K8s)</p>
+          <ul>
+            <li>Owned multi‑AZ kubeadm clusters; designed backup/restore with Velero and PV retention policies.</li>
+            <li>Built Jenkins on K8s with pre‑provisioned storage; solved Helm/PVC immutability and release‑state conflicts.</li>
+            <li>Shipped Prometheus + Grafana with SLOs, alerts, and runbooks reducing MTTR by ~35%.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2 class="section__title">Contact</h2>
+      <div class="contact">
+        <a class="btn" href="mailto:ashokpv.1993@gmail.com"><i data-feather="mail"></i> ashokpv.1993@gmail.com</a>
+        <a class="btn btn--ghost" href="https://github.com/Ashoky412" target="_blank"><i data-feather="github"></i> GitHub</a>
+        <a class="btn btn--ghost" href="https://www.linkedin.com/in/ashok-yadav-p-6359791a0/" target="_blank"><i data-feather="linkedin"></i> LinkedIn</a>
+        <a class="btn btn--ghost" href="https://medium.com/@ashoky412" target="_blank"><i data-feather="edit-3"></i> Medium</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      © <span id="year"></span> Ashok Pindiboyina · Built with vanilla HTML/CSS/JS · <a href="https://github.com/Ashoky412/ashok-portfolio" target="_blank" rel="noreferrer">Source</a>
+    </div>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
