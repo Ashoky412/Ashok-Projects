@@ -21,6 +21,9 @@ pipeline {
           def br   = (env.BRANCH_NAME ?: sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim())
           def safe = br.replaceAll(/[^A-Za-z0-9_.-]/, '-')
           def bn   = (env.BUILD_NUMBER ?: "0")
+          env.DOCKERHUB_REPO = (safe == 'main')
+            ? 'ashoky412/ashok-projects'
+            : 'ashoky412/ashok-projects-dev'   // pre-create this repo on Docker Hub
           env.IMAGE_TAG = "${safe}-${bn}-${sha}"
           if (!env.IMAGE_TAG?.trim()) { error "IMAGE_TAG is empty — refusing to build" }
           echo "Docker image → ${env.DOCKERHUB_REPO}:${env.IMAGE_TAG}"
