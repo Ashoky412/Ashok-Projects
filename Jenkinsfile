@@ -1,45 +1,30 @@
 pipeline {
   agent any
- 
-  environment {
-    // EDIT THESE
-    DOCKERHUB_USER = 'ashoky412'     // <-- change
-    IMAGE_NAME     = 'ashok-projects'              // <-- change if repo name differs
-    DOCKERHUB_REPO = "${DOCKERHUB_USER}/${IMAGE_NAME}"
+  options { timestamps(); skipDefaultCheckout(true) }
 
-    SHORT_SHA = ''
-    IMAGE_TAG = ''
+  environment {
+    DOCKERHUB_USER = 'ashoky412'
+    IMAGE_NAME     = 'ashok-projects'
+    DOCKERHUB_REPO = "${DOCKERHUB_USER}/${IMAGE_NAME}"
   }
 
   stages {
     stage('Checkout') {
-      steps {
-        checkout scm
-        script {
-          env.SHORT_SHA = sh(script: "git rev-parse --short=7 HEAD", returnStdout: true).trim()
-          def safeBranch = env.BRANCH_NAME.replaceAll('[^A-Za-z0-9_.-]', '-')
-          env.IMAGE_TAG  = "${safeBranch}-${env.BUILD_NUMBER}-${env.SHORT_SHA}"
-          echo "IMAGE_TAG = ${env.IMAGE_TAG}"
-        }
-      }
+      steps { checkout scm }
     }
 
-    stage('Build (optional)') {
-      when { expression { fileExists('package.json') || fileExists('pom.xml') || fileExists('Makefile') } }
+    stage('Compute Tag') {
       steps {
-        sh '''
-          set -e
-          if [ -f package.json ] && command -v npm >/dev/null; then
-            npm ci || npm install
-            npm run build || true
-          fi
-          if [ -f pom.xml ] && command -v mvn >/dev/null; then
-            mvn -B -DskipTests package
-          fi
-          if [ -f Makefile ]; then
-            make build || true
-          fi
-        '''
+        script {
+          // Always produce a non-empty, registry-safe tag
+          def sha  = sh(script: "git rev-parse --short=7 HEAD", returnStdout: true).trim()
+          def br   = (env.BRANCH_NAME ?: sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim())
+          def safe = br.replaceAll(/[^A-Za-z0-9_.-]/, '-')
+          def bn   = (env.BUILD_NUMBER ?: "0")
+          env.IMAGE_TAG = "${safe}-${bn}-${sha}"
+          if (!env.IMAGE_TAG?.trim()) { error "IMAGE_TAG is empty — refusing to build" }
+          echo "Docker image → ${env.DOCKERHUB_REPO}:${env.IMAGE_TAG}"
+        }
       }
     }
 
@@ -47,6 +32,7 @@ pipeline {
       steps {
         sh '''
           set -e
+          test -n "${IMAGE_TAG}" || (echo "Empty IMAGE_TAG" && exit 1)
           echo "Building ${DOCKERHUB_REPO}:${IMAGE_TAG}"
           docker build -t ${DOCKERHUB_REPO}:${IMAGE_TAG} .
         '''
@@ -68,8 +54,6 @@ pipeline {
   }
 
   post {
-    success {
-      echo "Pushed: ${env.DOCKERHUB_REPO}:${env.IMAGE_TAG}"
-    }
+    success { echo "Pushed: ${DOCKERHUB_REPO}:${IMAGE_TAG}" }
   }
 }
